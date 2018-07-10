@@ -27,14 +27,4 @@ if __name__ == '__main__':
     print('finished')
 
 
-print journeyDf.columns
-print '--------------------'
-print journeyDf.head()
-
-#print vehicleDf.columns
-
-#print trainDf.columns
-
-
-
 
