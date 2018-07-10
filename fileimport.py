@@ -33,13 +33,34 @@ if __name__ == '__main__':
 
 trainjournDf = pd.concat([journeyDf,trainDf], axis=1, sort='false')
 vehjournDf = journeyDf.join(vehicleDf, how='right')
-vehjournDf.set_index('sequence', append=True, inplace=True, drop = False)
 
-#looking at some basic stats from the data that i found intersting
+
+#looking at some basic stats from the data that I found intersting
 
 print trainjournDf.loadweigh.isnull().sum(), 'trains have given no loadweigh data:'
 no_loadweigh = trainjournDf[trainjournDf.loadweigh.isnull()==True]
 no_loadweigh.reset_index(drop=True, inplace=True)
 print no_loadweigh.loc[:,('UniqueJourneyId','tiplocIndex')]
 print 'This accounts to', (float(no_loadweigh.shape[0])/float(trainjournDf.shape[0])*100.), '% of all legs in the sample'
+print
+
+sum_weigh = vehjournDf.reset_index(drop=True)
+sum_weigh = sum_weigh.fillna(0.)
+tot=0
+sums = np.array([])
+for i in sum_weigh.index:
+    if sum_weigh.sequence.loc[i] == 0:
+        sums = np.append(sums,tot)
+        tot = 0
+        tot = tot + sum_weigh.loadweigh.loc[i]
+    else:
+        tot = tot + sum_weigh.loadweigh.loc[i]
+        
+for i in np.arange(10):
+    sums = np.append(sums,0)
+
+        
+print type(sums), sums.size
+
+        
                            
