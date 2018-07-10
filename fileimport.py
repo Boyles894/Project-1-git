@@ -28,8 +28,18 @@ if __name__ == '__main__':
 
     print('finished')
 
+# Joining both the train and vehicle dataframes with the journey data frames
+# Creates twio dataframes, onw wth the train as a whoel and one with the individual vehicles
+
 trainjournDf = pd.concat([journeyDf,trainDf], axis=1, sort='false')
-print trainjournDf.loadweigh.isnull().sum(), 'trains have given no loadweigh data'
-print trainjournDf.loc[:,['UniqueJourneyId','tiplocIndex']][trainjournDf.loadweigh.isnull()==True]
+vehjournDf = journeyDf.join(vehicleDf, how='right')
+vehjournDf.set_index('sequence', append=True, inplace=True, drop = False)
 
+#looking at some basic stats from the data that i found intersting
 
+print trainjournDf.loadweigh.isnull().sum(), 'trains have given no loadweigh data:'
+no_loadweigh = trainjournDf[trainjournDf.loadweigh.isnull()==True]
+no_loadweigh.reset_index(drop=True, inplace=True)
+print no_loadweigh.loc[:,('UniqueJourneyId','tiplocIndex')]
+print 'This accounts to', (float(no_loadweigh.shape[0])/float(trainjournDf.shape[0])*100.), '% of all legs in the sample'
+                           
