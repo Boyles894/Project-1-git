@@ -29,7 +29,7 @@ if __name__ == '__main__':
     print('finished')
 
 trainjournDf = pd.concat([journeyDf,trainDf], axis=1, sort='false')
-no_loadweigh = trainjournDf.loadweigh.isnull().sum()
-print no_loadweigh, 'trains have given no loadweigh data'
-
+print trainjournDf.loadweigh.isnull().sum(), 'trains have given no loadweigh data'
 print trainjournDf.loc[:,['UniqueJourneyId','tiplocIndex']][trainjournDf.loadweigh.isnull()==True]
+
+
