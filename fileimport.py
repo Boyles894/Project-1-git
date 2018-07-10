@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 def indexDataFrame(df, indexColumns, retainCols=False):
     if retainCols == True:
@@ -44,23 +44,8 @@ print no_loadweigh.loc[:,('UniqueJourneyId','tiplocIndex')]
 print 'This accounts to', (float(no_loadweigh.shape[0])/float(trainjournDf.shape[0])*100.), '% of all legs in the sample'
 print
 
-sum_weigh = vehjournDf.reset_index(drop=True)
-sum_weigh = sum_weigh.fillna(0.)
-tot=0
-sums = np.array([])
-for i in sum_weigh.index:
-    if sum_weigh.sequence.loc[i] == 0:
-        sums = np.append(sums,tot)
-        tot = 0
-        tot = tot + sum_weigh.loadweigh.loc[i]
-    else:
-        tot = tot + sum_weigh.loadweigh.loc[i]
-        
-for i in np.arange(10):
-    sums = np.append(sums,0)
-
-        
-print type(sums), sums.size
+trainjournDf.Hour.value_counts().plot()
+plt.plot()
 
         
                            
