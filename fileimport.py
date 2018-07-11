@@ -44,3 +44,13 @@ print (no_loadweigh.loc[:,('UniqueJourneyId','tiplocIndex')])
 print ('This accounts to', ((float(no_loadweigh.shape[0])/float(trainjournDf.shape[0])*100.)), '% of all legs in the sample')
 print ()
 
+
+traintime = trainjournDf.set_index('Hour', drop=False)
+traintime = (traintime.index.value_counts())
+traintime.index = traintime.index.astype(int)
+traintime = traintime.sort_index(axis=0, ascending=True)
+traintime.plot()
+plt.xlabel('Time (24-hour)')
+plt.ylabel('No. of Trains')
+plt.ylim(5,20)
+plt.title('No. of trains travelling throughout the day')
