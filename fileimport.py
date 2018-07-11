@@ -10,7 +10,7 @@ def indexDataFrame(df, indexColumns, retainCols=False):
 
 if __name__ == '__main__':
 
-    filepath = 'C:\\Users\\lb14g16\Project 1\datafiles\cddb.h5'
+    filepath = 'C:\\Users\\lwb1u18\Internship\Project 1\datafiles\cddb.h5'
 
     indexes = pd.read_hdf(filepath, 'indexes')
     journeyDf = pd.read_hdf(filepath, 'journeyDf')
@@ -37,15 +37,10 @@ vehjournDf = journeyDf.join(vehicleDf, how='right')
 
 #looking at some basic stats from the data that I found intersting
 
-print trainjournDf.loadweigh.isnull().sum(), 'trains have given no loadweigh data:'
+print ((trainjournDf.loadweigh.isnull().sum()), ('trains have given no loadweigh data:'))
 no_loadweigh = trainjournDf[trainjournDf.loadweigh.isnull()==True]
 no_loadweigh.reset_index(drop=True, inplace=True)
-print no_loadweigh.loc[:,('UniqueJourneyId','tiplocIndex')]
-print 'This accounts to', (float(no_loadweigh.shape[0])/float(trainjournDf.shape[0])*100.), '% of all legs in the sample'
-print
+print (no_loadweigh.loc[:,('UniqueJourneyId','tiplocIndex')])
+print ('This accounts to', ((float(no_loadweigh.shape[0])/float(trainjournDf.shape[0])*100.)), '% of all legs in the sample')
+print ()
 
-trainjournDf.Hour.value_counts().plot()
-plt.plot()
-
-        
-                           
